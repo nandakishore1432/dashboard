@@ -1,0 +1,8 @@
+{
+  "name": "Smart Student Aura",
+  "description": "A high-performance student productivity dashboard with dynamic task management, interactive analytics, and aura-based insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

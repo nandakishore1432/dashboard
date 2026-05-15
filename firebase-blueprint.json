@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents a user and their settings.",
+      "type": "object",
+      "properties": {
+        "userName": { "type": "string", "description": "The user's display name." },
+        "accentColor": { "type": "string", "description": "User chosen UI accent color." },
+        "showMesh": { "type": "boolean", "description": "Whether to show the background mesh gradient." },
+        "showSubtaskCounts": { "type": "boolean", "description": "Whether to show progress counts on tasks." },
+        "email": { "type": "string", "format": "email" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userName", "email"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "An assignment or educational goal.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the task." },
+        "completed": { "type": "boolean", "description": "Completion status." },
+        "userId": { "type": "string", "description": "Owner ID." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "completed", "userId", "createdAt", "updatedAt"]
+    },
+    "Subtask": {
+      "title": "Subtask",
+      "description": "A progress milestone for a task.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Subtask title." },
+        "completed": { "type": "boolean", "description": "Completion status." },
+        "taskId": { "type": "string", "description": "Parent task ID." },
+        "userId": { "type": "string", "description": "Owner ID (inherited for easier filtering)." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "completed", "taskId", "userId", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile and settings documents."
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Main task/assignment documents."
+    },
+    "/tasks/{taskId}/subtasks/{subtaskId}": {
+      "schema": "Subtask",
+      "description": "Subtasks belonging to a specific task."
+    }
+  }
+}
